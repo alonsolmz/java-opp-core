@@ -5,9 +5,6 @@ import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
-import java.util.List;
-
-//Entidad Stock: Detalle del inventario por combinación de Producto (modelo), Talla y Color.
 
 @Entity
 @Table(name = "stock")
@@ -23,20 +20,28 @@ public class Stock {
 
     private Integer cantidad;
 
-    // Relación: Referencia al Producto (modelo de zapato) (EAGER)
-    @ManyToOne(fetch = FetchType.EAGER)
-    @JoinColumn(name = "producto_id")
+
+    @ManyToOne(fetch = FetchType.LAZY)
+    @JoinColumn(name = "producto_id", nullable = true)
     private Producto producto;
 
-    private String talla; // Talla específica
+    private String talla;
 
-    // Relación: Referencia al Color (EAGER)
-    @ManyToOne(fetch = FetchType.EAGER)
-    @JoinColumn(name = "color_id")
+    @ManyToOne(fetch = FetchType.LAZY)
+    @JoinColumn(name = "color_id", nullable = true)
     private Color color;
 
-    // Relación: Los movimientos de inventario que afectan a este Stock.
-    // ESTRATEGIA: LAZY
-    @OneToMany(mappedBy = "stockItem", fetch = FetchType.LAZY)
-    private List<MovimientoInventario> movimientos;
+
+    @ManyToOne(fetch = FetchType.LAZY)
+    @JoinColumn(name = "insumo_id", nullable = true)
+    private Insumo insumo;
+
+
+    public boolean esStockProducto() {
+        return this.producto != null;
+    }
+
+    public boolean esStockInsumo() {
+        return this.insumo != null;
+    }
 }

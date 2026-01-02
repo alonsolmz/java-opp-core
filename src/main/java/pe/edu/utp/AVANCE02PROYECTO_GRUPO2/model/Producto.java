@@ -19,12 +19,12 @@ public class Producto {
     @NotBlank(message = "El nombre es obligatorio")
     private String nombre;
 
-    // CORRECCIÓN CLAVE: Usamos BigDecimal para cálculos monetarios precisos
+
     @Column(nullable = false, precision = 10, scale = 2)
     @Min(value = 0, message = "El precio no puede ser negativo")
     private BigDecimal precio;
 
-    // CORRECCIÓN CLAVE: Usamos BigDecimal para cálculos monetarios precisos
+
     @Column(nullable = false, precision = 10, scale = 2)
     @Min(value = 0, message = "El precio no puede ser negativo")
     private BigDecimal preciounitario;
@@ -44,5 +44,9 @@ public class Producto {
     @JoinColumn(name = "marca_id")
     private Marca marca;
 
-    // Ya no se necesita el setter vacío gracias a Lombok @Data.
+    public long compareTo() {
+        return 0;
+    }
+
+
 }

@@ -1,12 +1,26 @@
 package pe.edu.utp.AVANCE02PROYECTO_GRUPO2.service;
 
 import pe.edu.utp.AVANCE02PROYECTO_GRUPO2.model.*;
-import pe.edu.utp.AVANCE02PROYECTO_GRUPO2.model.Proveedor;
-
 import java.util.List;
 import java.util.Optional;
 
 public interface IStockService {
-    Stock actualizarStock(Long idStock, Integer nuevaCantidad);
-    Optional<Stock> buscarStockPorProductoTallaColor(Long idProducto, String talla, Long idColor);
+
+
+
+
+    Stock actualizarStockPorInsumo(Insumo insumo, Integer cantidadAñadida);
+
+
+    Stock reducirStockDeProducto(Producto producto, String talla, Color color, Integer cantidadVendida);
+
+    List<Stock> listarTodo();
+
+
+    Optional<Stock> buscarPorId(Long idStock);
+
+
+    Optional<Stock> buscarStockPorInsumoId(Long idInsumo);
+
+    List<Stock> listarStockBajo(Integer cantidadMinima);
 }

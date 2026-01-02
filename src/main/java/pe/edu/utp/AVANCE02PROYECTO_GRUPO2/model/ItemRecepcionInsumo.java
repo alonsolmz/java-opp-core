@@ -6,7 +6,7 @@ import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
 
-//Detalle de la recepción de insumos (qué insumo y qué cantidad llegó).
+
 
 @Entity
 @Table(name = "items_recepcion_insumo")
@@ -23,7 +23,7 @@ public class ItemRecepcionInsumo {
     private Integer cantidadRecibida;
     private Double costoUnitario;
 
-    // Relación: El insumo recibido (EAGER)
+
     @ManyToOne(fetch = FetchType.EAGER)
     @JoinColumn(name = "insumo_id")
     private Insumo insumo;

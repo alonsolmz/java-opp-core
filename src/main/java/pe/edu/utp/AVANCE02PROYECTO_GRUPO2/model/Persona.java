@@ -3,12 +3,9 @@ package pe.edu.utp.AVANCE02PROYECTO_GRUPO2.model;
 import jakarta.persistence.*;
 import jakarta.validation.constraints.*;
 import lombok.Data;
-import java.time.LocalDateTime;
-import java.util.ArrayList;
-import java.util.List;
 
-// --- CLASE BASE: PERSONA (Si existe) ---
-// La he añadido basándome en tu estructura, asumiendo que Cliente y Empleado la extienden.
+
+
 @Data
 @MappedSuperclass
 public class Persona {

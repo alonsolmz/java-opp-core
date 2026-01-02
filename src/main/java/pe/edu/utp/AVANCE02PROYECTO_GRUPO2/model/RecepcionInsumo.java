@@ -9,7 +9,7 @@ import java.time.LocalDateTime;
 import java.util.List;
 
 
- // Entidad que registra la recepción de insumos de un proveedor.
+
 
 @Entity
 @Table(name = "recepciones_insumo")
@@ -26,7 +26,7 @@ public class RecepcionInsumo {
     private LocalDateTime fechaRecepcion;
     private Double costoTotal;
 
-    // Relación: Los items recibidos (EAGER)
+
     @OneToMany(cascade = CascadeType.ALL, fetch = FetchType.EAGER)
     @JoinColumn(name = "recepcion_id")
     private List<ItemRecepcionInsumo> items;

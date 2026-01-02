@@ -1,13 +1,16 @@
 package pe.edu.utp.AVANCE02PROYECTO_GRUPO2.service.impl;
 
-import pe.edu.utp.AVANCE02PROYECTO_GRUPO2.model.Producto;
-import pe.edu.utp.AVANCE02PROYECTO_GRUPO2.repository.ProductoRepository;
-import pe.edu.utp.AVANCE02PROYECTO_GRUPO2.service.IProductoService;
+
+import jakarta.transaction.Transactional;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
-import org.springframework.transaction.annotation.Transactional;
+import pe.edu.utp.AVANCE02PROYECTO_GRUPO2.exception.ResourceNotFoundException;
+import pe.edu.utp.AVANCE02PROYECTO_GRUPO2.model.Producto;
 import pe.edu.utp.AVANCE02PROYECTO_GRUPO2.repository.MarcaRepository;
+import pe.edu.utp.AVANCE02PROYECTO_GRUPO2.repository.ProductoRepository;
+import pe.edu.utp.AVANCE02PROYECTO_GRUPO2.service.IProductoService;
 
+import java.math.BigDecimal;
 import java.util.List;
 import java.util.Optional;
 import java.util.stream.Collectors;
@@ -17,56 +20,73 @@ import java.util.stream.Collectors;
 public class ProductoServiceImpl implements IProductoService {
 
     private final ProductoRepository productoRepository;
-    private final MarcaRepository marcaRepository; // Necesario para la búsqueda por marca
+    private final MarcaRepository marcaRepository;
 
     @Autowired
     public ProductoServiceImpl(ProductoRepository productoRepository, MarcaRepository marcaRepository) {
         this.productoRepository = productoRepository;
-        this.marcaRepository = marcaRepository;
+        this.marcaRepository = marcaRepository; // <--- Inicializar la nueva dependencia
     }
 
-    @Transactional
     @Override
+    public List<Producto> buscarPorMarcaNombre(String marcaNombre) { // <--- Nombre de método corregido
+
+
+
+
+        return productoRepository.findAll().stream()
+                .filter(p -> p.getMarca() != null && p.getMarca().getNombre().equalsIgnoreCase(marcaNombre))
+                .collect(Collectors.toList());
+    }
+
+    @Override
+    @Transactional
     public Producto guardar(Producto producto) {
-        // Lógica de negocio: Ej. Asegurar que el precio no sea negativo
-        if (producto.getPreciounitario() < 0) {
-            throw new IllegalArgumentException("El precio unitario no puede ser negativo.");
+
+        if (producto.getPreciounitario() == null || producto.getPreciounitario().compareTo(BigDecimal.ZERO) < 0) {
+            throw new IllegalArgumentException("El precio unitario no puede ser nulo o negativo.");
         }
+
+
+        if (producto.getPrecio() == null || producto.getPrecio().compareTo(BigDecimal.ZERO) < 0) {
+            throw new IllegalArgumentException("El precio de venta no puede ser nulo o negativo.");
+        }
+
+
         return productoRepository.save(producto);
     }
 
-    @Transactional(readOnly = true)
     @Override
     public List<Producto> listarTodos() {
         return productoRepository.findAll();
     }
 
 
-    @Transactional(readOnly = true)
+
     @Override
-    public Optional<Producto> buscarPorId(Long id) {
-        return productoRepository.findById(id);
+    public Optional<Producto> buscarPorId(Long id) { // <--- Cambiar el tipo de retorno aquí
+        return productoRepository.findById(id); // <--- Ahora es correcto
     }
 
 
-    @Transactional(readOnly = true)
     @Override
     public List<Producto> buscarPorMarca(String marcaNombre) {
-        // Esto asume que tienes un método findByNombre en MarcaRepository
-        // Por simplicidad, lo implementamos filtrando todos, pero en un entorno real
-        // usarías consultas JPA.
+
         return productoRepository.findAll().stream()
                 .filter(p -> p.getMarca() != null && p.getMarca().getNombre().equalsIgnoreCase(marcaNombre))
                 .collect(Collectors.toList());
     }
 
-    /**
-     * Elimina un producto por su ID.
-     * @param id El ID del producto a eliminar.
-     */
+
     @Transactional
     @Override
     public void eliminar(Long id) {
+
+
+        productoRepository.findById(id)
+                .orElseThrow(() -> new ResourceNotFoundException("Producto no encontrado con ID: " + id));
+
+
         productoRepository.deleteById(id);
     }
 }

@@ -7,6 +7,7 @@ import org.mockito.InjectMocks;
 import org.mockito.Mock;
 import org.mockito.junit.jupiter.MockitoExtension;
 
+import pe.edu.utp.AVANCE02PROYECTO_GRUPO2.exception.ResourceNotFoundException;
 import pe.edu.utp.AVANCE02PROYECTO_GRUPO2.model.Cliente;
 import pe.edu.utp.AVANCE02PROYECTO_GRUPO2.model.DetalleVenta;
 import pe.edu.utp.AVANCE02PROYECTO_GRUPO2.model.Empleado;
@@ -29,10 +30,7 @@ import static org.mockito.ArgumentMatchers.any;
 import static org.mockito.ArgumentMatchers.anyLong;
 import static org.mockito.Mockito.*;
 
-/**
- * Clase de pruebas unitarias para VentaServiceImpl.
- * Se utiliza Mockito para simular las dependencias.
- */
+
 @ExtendWith(MockitoExtension.class)
 public class VentaServiceTest {
 
@@ -82,9 +80,6 @@ public class VentaServiceTest {
         venta.setDetalleVenta(Collections.singletonList(detalle1));
     }
 
-    /**
-     * Prueba el caso de éxito de registrar una venta.
-     */
     @Test
     void registrarVenta_Exito() {
         // Configuración de Mocks para el caso de éxito
@@ -118,9 +113,7 @@ public class VentaServiceTest {
         verify(ventaRepository, times(1)).save(any(Venta.class));
     }
 
-    /**
-     * Prueba el caso donde el cliente no existe.
-     */
+
     @Test
     void registrarVenta_ClienteNoEncontrado_LanzaExcepcion() {
         // Configuración de Mocks: Cliente no encontrado
@@ -136,9 +129,7 @@ public class VentaServiceTest {
         verify(ventaRepository, never()).save(any(Venta.class));
     }
 
-    /**
-     * Prueba el caso donde el empleado no existe.
-     */
+
     @Test
     void registrarVenta_EmpleadoNoEncontrado_LanzaExcepcion() {
         // Configuración de Mocks: Cliente OK, Empleado NO encontrado
@@ -155,9 +146,7 @@ public class VentaServiceTest {
         verify(ventaRepository, never()).save(any(Venta.class));
     }
 
-    /**
-     * Prueba el caso donde el stock es insuficiente.
-     */
+
     @Test
     void registrarVenta_StockInsuficiente_LanzaExcepcion() {
         // Establecer cantidad solicitada mayor que el stock (50 solicitados > 50 en stock)
@@ -182,9 +171,7 @@ public class VentaServiceTest {
         verify(ventaRepository, never()).save(any(Venta.class));
     }
 
-    /**
-     * Prueba la funcionalidad de listar todas las ventas.
-     */
+
     @Test
     void listarTodos_DebeDevolverListaDeVentas() {
         // Datos de prueba
@@ -203,9 +190,7 @@ public class VentaServiceTest {
         verify(ventaRepository, times(1)).findAll();
     }
 
-    /**
-     * Prueba la funcionalidad de buscar una venta por ID.
-     */
+
     @Test
     void buscarPorId_VentaEncontrada_DebeDevolverOptionalConVenta() {
         // Establecer ID para la búsqueda

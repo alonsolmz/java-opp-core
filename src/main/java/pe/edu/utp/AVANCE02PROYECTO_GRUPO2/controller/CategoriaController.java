@@ -10,10 +10,7 @@ import org.springframework.web.bind.annotation.*;
 import java.util.List;
 import java.util.Optional;
 
-/**
- * Controlador REST para la gestión de la entidad Categoria.
- * Mapea a /api/categorias
- */
+
 @RestController
 @RequestMapping("/api/categorias")
 public class CategoriaController {
@@ -25,35 +22,21 @@ public class CategoriaController {
         this.categoriaService = categoriaService;
     }
 
-    /**
-     * Crea una nueva Categoria.
-     * Mapea a POST /api/categorias
-     * @param categoria El objeto Categoria a guardar.
-     * @return ResponseEntity con la Categoria creada y el estado HTTP 201 (Created).
-     */
+
     @PostMapping
     public ResponseEntity<Categoria> crearCategoria(@RequestBody Categoria categoria) {
         Categoria nuevaCategoria = categoriaService.guardar(categoria);
         return new ResponseEntity<>(nuevaCategoria, HttpStatus.CREATED);
     }
 
-    /**
-     * Lista todas las Categorias.
-     * Mapea a GET /api/categorias
-     * @return ResponseEntity con la lista de Categorias y el estado HTTP 200 (OK).
-     */
+
     @GetMapping
     public ResponseEntity<List<Categoria>> listarTodos() {
         List<Categoria> categorias = categoriaService.listarTodos();
         return new ResponseEntity<>(categorias, HttpStatus.OK);
     }
 
-    /**
-     * Busca una Categoria por su ID.
-     * Mapea a GET /api/categorias/{id}
-     * @param id El ID de la categoría a buscar.
-     * @return ResponseEntity con la Categoria encontrada o estado 404 (Not Found).
-     */
+
     @GetMapping("/{id}")
     public ResponseEntity<Categoria> buscarPorId(@PathVariable Long id) {
         Optional<Categoria> categoria = categoriaService.buscarPorId(id);
@@ -61,13 +44,7 @@ public class CategoriaController {
                 .orElseGet(() -> new ResponseEntity<>(HttpStatus.NOT_FOUND));
     }
 
-    /**
-     * Actualiza una Categoria existente.
-     * Mapea a PUT /api/categorias/{id}
-     * @param id El ID de la categoría a actualizar.
-     * @param categoriaDetalles Los datos actualizados de la Categoria.
-     * @return ResponseEntity con la Categoria actualizada o estado 404.
-     */
+
     @PutMapping("/{id}")
     public ResponseEntity<Categoria> actualizarCategoria(@PathVariable Long id, @RequestBody Categoria categoriaDetalles) {
         Optional<Categoria> categoriaExistente = categoriaService.buscarPorId(id);
@@ -85,12 +62,7 @@ public class CategoriaController {
         }
     }
 
-    /**
-     * Elimina una Categoria por su ID.
-     * Mapea a DELETE /api/categorias/{id}
-     * @param id El ID de la categoría a eliminar.
-     * @return ResponseEntity con estado HTTP 204 (No Content).
-     */
+
     @DeleteMapping("/{id}")
     public ResponseEntity<Void> eliminarCategoria(@PathVariable Long id) {
         Optional<Categoria> categoria = categoriaService.buscarPorId(id);

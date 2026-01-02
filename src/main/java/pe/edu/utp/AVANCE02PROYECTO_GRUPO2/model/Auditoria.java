@@ -8,7 +8,7 @@ import lombok.Setter;
 import java.time.LocalDateTime;
 
 
- //Entidad de Auditoria para registrar cambios importantes en el sistema.
+
 
 @Entity
 @Table(name = "auditoria")

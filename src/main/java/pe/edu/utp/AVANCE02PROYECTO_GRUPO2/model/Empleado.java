@@ -13,8 +13,7 @@ public class Empleado extends Persona {
     @Column(name = "id_empleado")
     private Long idEmpleado;
 
-    // CAMPO AÑADIDO: Este campo era el que faltaba en la entidad Empleado
-    // y es requerido por la lógica de las pruebas unitarias.
+
     @NotBlank(message = "El puesto/cargo es obligatorio")
     private String puesto;
 }

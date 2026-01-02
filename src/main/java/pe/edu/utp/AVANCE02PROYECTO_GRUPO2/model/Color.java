@@ -7,7 +7,7 @@ import lombok.NoArgsConstructor;
 import lombok.Setter;
 import java.util.List;
 
-//Entidad Color de los productos.
+
 
 @Entity
 @Table(name = "colores")

@@ -30,31 +30,21 @@ public class ClienteServiceImpl implements IClienteService {
             return clienteRepository.save(cliente);
         }
 
-        /**
-         * Lista todos los clientes.
-         * @return Una lista de todos los clientes.
-         */
+
         @Transactional(readOnly = true)
         @Override
         public List<Cliente> listarTodos () {
             return clienteRepository.findAll();
         }
 
-        /**
-         * Busca un cliente por su identificador único.
-         * @param id El ID del cliente.
-         * @return Un Optional que contiene el cliente si existe.
-         */
+
         @Transactional(readOnly = true)
         @Override
         public Optional<Cliente> buscarPorId (Long id){
             return clienteRepository.findById(id);
         }
 
-        /**
-         * Elimina un cliente por su ID.
-         * @param id El ID del cliente a eliminar.
-         */
+
         @Transactional
         @Override
         public void eliminar (Long id){

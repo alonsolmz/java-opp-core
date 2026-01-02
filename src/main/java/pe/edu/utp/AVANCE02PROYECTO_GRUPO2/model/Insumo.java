@@ -7,7 +7,7 @@ import lombok.NoArgsConstructor;
 import lombok.Setter;
 import java.util.List;
 
-//Entidad Insumo (materiales como Cuero, Hilo, Goma, etc.).
+
 
 @Entity
 @Table(name = "insumos")
@@ -25,7 +25,7 @@ public class Insumo {
     private Double costoUnitario;
     private Integer stockActual;
 
-    // Relación: Un insumo es proporcionado por un Proveedor (EAGER)
+
     @ManyToOne(fetch = FetchType.EAGER)
     @JoinColumn(name = "proveedor_id")
     private Proveedor proveedor;

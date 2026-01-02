@@ -10,10 +10,7 @@ import org.springframework.web.bind.annotation.*;
 import java.util.List;
 import java.util.Optional;
 
-/**
- * Controlador REST para la gestión de la entidad Marca.
- * Mapea a /api/marcas
- */
+
 @RestController
 @RequestMapping("/api/marcas")
 public class MarcaController {
@@ -25,35 +22,21 @@ public class MarcaController {
         this.marcaService = marcaService;
     }
 
-    /**
-     * Crea una nueva Marca.
-     * Mapea a POST /api/marcas
-     * @param marca El objeto Marca a guardar.
-     * @return ResponseEntity con la Marca creada y el estado HTTP 201 (Created).
-     */
+
     @PostMapping
     public ResponseEntity<Marca> crearMarca(@RequestBody Marca marca) {
         Marca nuevaMarca = marcaService.guardar(marca);
         return new ResponseEntity<>(nuevaMarca, HttpStatus.CREATED);
     }
 
-    /**
-     * Lista todas las Marcas.
-     * Mapea a GET /api/marcas
-     * @return ResponseEntity con la lista de Marcas y el estado HTTP 200 (OK).
-     */
+
     @GetMapping
     public ResponseEntity<List<Marca>> listarTodos() {
         List<Marca> marcas = marcaService.listarTodos();
         return new ResponseEntity<>(marcas, HttpStatus.OK);
     }
 
-    /**
-     * Busca una Marca por su ID.
-     * Mapea a GET /api/marcas/{id}
-     * @param id El ID de la marca a buscar.
-     * @return ResponseEntity con la Marca encontrada o estado 404 (Not Found).
-     */
+
     @GetMapping("/{id}")
     public ResponseEntity<Marca> buscarPorId(@PathVariable Long id) {
         Optional<Marca> marca = marcaService.buscarPorId(id);
@@ -61,13 +44,7 @@ public class MarcaController {
                 .orElseGet(() -> new ResponseEntity<>(HttpStatus.NOT_FOUND));
     }
 
-    /**
-     * Actualiza una Marca existente.
-     * Mapea a PUT /api/marcas/{id}
-     * @param id El ID de la marca a actualizar.
-     * @param marcaDetalles Los datos actualizados de la Marca.
-     * @return ResponseEntity con la Marca actualizada o estado 404.
-     */
+
     @PutMapping("/{id}")
     public ResponseEntity<Marca> actualizarMarca(@PathVariable Long id, @RequestBody Marca marcaDetalles) {
         Optional<Marca> marcaExistente = marcaService.buscarPorId(id);
@@ -75,7 +52,6 @@ public class MarcaController {
         if (marcaExistente.isPresent()) {
             Marca marcaActualizar = marcaExistente.get();
 
-            // Solo actualizamos los campos modificables
             marcaActualizar.setNombre(marcaDetalles.getNombre());
             marcaActualizar.setDescripcion(marcaDetalles.getDescripcion());
 
@@ -86,12 +62,7 @@ public class MarcaController {
         }
     }
 
-    /**
-     * Elimina una Marca por su ID.
-     * Mapea a DELETE /api/marcas/{id}
-     * @param id El ID de la marca a eliminar.
-     * @return ResponseEntity con estado HTTP 204 (No Content).
-     */
+
     @DeleteMapping("/{id}")
     public ResponseEntity<Void> eliminarMarca(@PathVariable Long id) {
         Optional<Marca> marca = marcaService.buscarPorId(id);

@@ -8,7 +8,6 @@ import lombok.Setter;
 import java.time.LocalDateTime;
 
 
- // Entidad Reporte, representa un informe generado por el sistema.
 
 @Entity
 @Table(name = "reportes")
@@ -22,8 +21,8 @@ public class Reporte {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long idReporte;
 
-    private String tipoReporte; // Ej: "Ventas Mensuales", "Stock Bajo"
+    private String tipoReporte;
     private LocalDateTime fechaGeneracion;
-    private String contenidoArchivo; // Podría ser un path o contenido base64 del PDF/JSON
-    private String generadoPor; // Empleado que generó el reporte
+    private String contenidoArchivo;
+    private String generadoPor;
 }

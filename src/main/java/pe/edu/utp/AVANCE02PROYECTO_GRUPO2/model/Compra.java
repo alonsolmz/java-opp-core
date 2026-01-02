@@ -4,7 +4,7 @@ import jakarta.persistence.*;
 import jakarta.validation.constraints.NotNull;
 import jakarta.validation.constraints.PositiveOrZero;
 import lombok.Data;
-import pe.edu.utp.AVANCE02PROYECTO_GRUPO2.model.Enums.EstadoCompra;
+import pe.edu.utp.AVANCE02PROYECTO_GRUPO2.Util.EstadoCompra;
 
 import java.time.LocalDateTime;
 import java.util.ArrayList;

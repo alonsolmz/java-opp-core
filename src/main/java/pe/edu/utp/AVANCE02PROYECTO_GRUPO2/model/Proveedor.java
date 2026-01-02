@@ -21,4 +21,6 @@ public class Proveedor {
 
     @NotBlank(message = "La dirección es obligatoria")
     private String direccion;
+
+
 }

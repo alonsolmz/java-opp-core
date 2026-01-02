@@ -10,6 +10,7 @@ import pe.edu.utp.AVANCE02PROYECTO_GRUPO2.model.Producto;
 import pe.edu.utp.AVANCE02PROYECTO_GRUPO2.repository.ProductoRepository;
 import pe.edu.utp.AVANCE02PROYECTO_GRUPO2.service.impl.ProductoServiceImpl;
 
+import java.math.BigDecimal;
 import java.util.Arrays;
 import java.util.List;
 import java.util.Optional;
@@ -17,10 +18,7 @@ import java.util.Optional;
 import static org.junit.jupiter.api.Assertions.*;
 import static org.mockito.Mockito.*;
 
-/**
- * Pruebas unitarias para la clase ProductoServiceImpl.
- * Utiliza Mockito para simular la capa de persistencia (ProductoRepository).
- */
+
 @ExtendWith(MockitoExtension.class)
 class ProductoServiceImplTest {
 
@@ -42,14 +40,14 @@ class ProductoServiceImplTest {
         // CORRECCIÓN: Usar setIdProducto() en lugar de setId()
         producto1.setIdProducto(1L);
         producto1.setNombre("Zapatilla Deportiva");
-        producto1.setPrecio(150.0);
+        producto1.setPrecio(BigDecimal.valueOf(150.0));
         producto1.setStock(100);
 
         producto2 = new Producto();
         // CORRECCIÓN: Usar setIdProducto() en lugar de setId()
         producto2.setIdProducto(2L);
         producto2.setNombre("Botín Casual");
-        producto2.setPrecio(200.0);
+        producto2.setPrecio(BigDecimal.valueOf(8498.02934));
         producto2.setStock(50);
     }
 
@@ -58,14 +56,14 @@ class ProductoServiceImplTest {
         // Configuración del mock: cuando se llame a save con producto1, debe devolver producto1
         when(productoRepository.save(producto1)).thenReturn(producto1);
 
-        // Ejecución del método a probar
+
         Producto productoGuardado = productoService.guardar(producto1);
 
         // Verificación: comprueba que el objeto devuelto no sea nulo y que sea el esperado
         assertNotNull(productoGuardado);
         assertEquals("Zapatilla Deportiva", productoGuardado.getNombre());
 
-        // Verifica que el método save del repositorio haya sido llamado exactamente una vez
+
         verify(productoRepository, times(1)).save(producto1);
     }
 
@@ -83,7 +81,6 @@ class ProductoServiceImplTest {
         assertEquals(2, productos.size());
         assertEquals("Botín Casual", productos.get(1).getNombre());
 
-        // Verifica que el método findAll del repositorio haya sido llamado
         verify(productoRepository, times(1)).findAll();
     }
 
@@ -98,11 +95,10 @@ class ProductoServiceImplTest {
 
         // Verificación
         assertTrue(productoEncontrado.isPresent());
-        // CORRECCIÓN: Usar getIdProducto() en lugar de getId()
         assertEquals(id, productoEncontrado.get().getIdProducto());
         assertEquals("Zapatilla Deportiva", productoEncontrado.get().getNombre());
 
-        // Verifica que el método findById del repositorio haya sido llamado
+
         verify(productoRepository, times(1)).findById(id);
     }
 
@@ -118,21 +114,19 @@ class ProductoServiceImplTest {
         // Verificación
         assertFalse(productoEncontrado.isPresent());
 
-        // Verifica que el método findById del repositorio haya sido llamado
+
         verify(productoRepository, times(1)).findById(id);
     }
 
     @Test
     void testEliminarProducto() {
         Long id = 1L;
-        // La eliminación no devuelve nada, solo verificamos que se llame al método
-        // No necesitamos configurar el mock, ya que deleteById devuelve void por defecto
+
 
         // Ejecución
         productoService.eliminar(id);
 
-        // Verificación: verifica que el método deleteById del repositorio haya sido llamado
-        // y que no se hayan lanzado excepciones
+
         verify(productoRepository, times(1)).deleteById(id);
     }
 }

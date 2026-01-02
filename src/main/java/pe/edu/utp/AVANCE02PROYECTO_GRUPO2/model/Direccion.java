@@ -25,5 +25,5 @@ public class Direccion {
 
     @OneToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "cliente_id")
-    private Cliente cliente; // Clave foránea al cliente
+    private Cliente cliente;
 }

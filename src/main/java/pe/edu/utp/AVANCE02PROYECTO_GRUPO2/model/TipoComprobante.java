@@ -8,7 +8,7 @@ import lombok.Setter;
 import java.util.List;
 
 
- //Entidad TipoComprobante (Factura, Boleta, etc.).
+
 
 @Entity
 @Table(name = "tipos_comprobante")
@@ -22,12 +22,11 @@ public class TipoComprobante {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long idComprobante;
 
-    private String nombre; // Ej: Factura, Boleta
+    private String nombre;
     private String serie;
     private String descripcion;
 
-    // Relación: Este tipo de comprobante aplica a muchas ventas.
-    // ESTRATEGIA: LAZY
+
     @OneToMany(mappedBy = "tipoComprobante", fetch = FetchType.LAZY)
     private List<Venta> ventas;
 }
