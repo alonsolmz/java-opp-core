@@ -13,7 +13,7 @@
 
 
     <groupId>pe.edu.utp</groupId>
-    <artifactId>AVANCE02PROYECTO_GRUPO2</artifactId>
+    <artifactId>poojavalmz</artifactId>
     <version>0.0.1-SNAPSHOT</version>
     <name>AVANCE02PROYECTO_GRUPO2</name>
     <description>Proyecto de Sistema de Gestión de Inventario/Ventas</description>
