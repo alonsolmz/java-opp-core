@@ -1,39 +1,37 @@
 # Inventory & Sales Management System (Java OOP Core)
 
-Este proyecto es un sistema integral para la gestión de inventarios, ventas y compras, diseñado bajo los principios fundamentales de la **Programación Orientada a Objetos (POO)** y una arquitectura de software multicapa.
+Este proyecto es un sistema integral para la gestión de inventarios, ventas y compras, diseñado bajo los principios de la **Programación Orientada a Objetos (POO)** y una arquitectura multicapa. Provee una solución robusta para el control de stock y transacciones comerciales.
 
-## 🛠️ Tecnologías Utilizadas
+## 🛠️ Tecnologías y Dependencias
 
-* **Lenguaje:** Java 17
-* **Framework:** Spring Boot 3.x
+Basado en la configuración del `pom.xml`, el sistema utiliza:
+
+* **Lenguaje:** Java 19
+* **Framework:** Spring Boot 3.2.0
+* **Documentación API:** Swagger / OpenAPI 3 (SpringDoc 2.5.0)
 * **Persistencia:** Spring Data JPA
-* **Base de Datos:** H2 Database (Motor en memoria, no requiere configuración externa)
-* **Gestor de Dependencias:** Maven
-* **Pruebas:** JUnit 5 & Mockito
+* **Base de Datos:** H2 Database (Runtime)
+* **Productividad:** Project Lombok (para limpieza de boilerplate)
+* **Validación:** Spring Boot Starter Validation
+* **Pruebas:** Spring Boot Starter Test
 
-## 🏗️ Arquitectura y Patrones de Diseño
+## 🏗️ Arquitectura del Software
 
-El sistema implementa el patrón **Controller-Service-Repository**, garantizando una separación de responsabilidades clara y facilitando el mantenimiento:
+El proyecto se organiza siguiendo el patrón **Controller-Service-Repository**, lo que permite una separación clara de responsabilidades:
 
-* **Model (Entities):** Representación de los objetos de negocio como `Producto`, `Venta`, `Cliente` y `Empleado`.
-* **Repository:** Capa de abstracción de datos utilizando interfaces de Spring Data.
-* **Service:** Implementación de la lógica de negocio y reglas del sistema (paquete `service.impl`).
-* **Controller:** Exposición de endpoints y lógica de control para la gestión de recursos.
-* **Enums/Util:** Manejo profesional de estados constantes como `MetodoPago` y `EstadoVenta`.
+* **Controller:** Capa de exposición de servicios web y endpoints.
+* **Service:** Contiene la lógica de negocio central (Interfaces e Implementaciones).
+* **Repository:** Gestión de la persistencia de datos mediante Spring Data.
+* **Model:** Entidades del dominio que representan los activos del negocio (Producto, Cliente, Venta, etc.).
+* **Util:** Tipos enumerados y constantes para estandarizar procesos (Metodos de Pago, Estados).
 
 
-## 🚀 Características Principales
 
-1. **Gestión de Stock:** Control automatizado de inventarios basado en entradas por compras y salidas por ventas.
-2. **Relaciones Complejas:** Implementación de relaciones JPA (OneToMany, ManyToOne) entre entidades como `Venta` y `ItemVenta`.
-3. **Persistencia Dinámica:** Uso de **H2 Database**, lo que permite ejecutar el proyecto de forma inmediata tras clonarlo.
-4. **Validación y Excepciones:** Manejo centralizado de errores con `ResourceNotFoundException`.
-5. **Pruebas Unitarias:** Cobertura de lógica crítica en servicios para asegurar la integridad de los datos.
+## 🚀 Características Destacadas
 
-## 💻 Instrucciones para Ejecución Local
+1. **Documentación Interactiva:** Gracias a SpringDoc OpenAPI, puedes visualizar y probar los endpoints del sistema de forma sencilla.
+2. **Gestión de Stock:** Control de inventario dinámico basado en las operaciones de compra y venta.
+3. **Desarrollo Ágil:** Uso de Lombok para mantener las clases de modelo limpias de getters, setters y constructores manuales.
+4. **Base de Datos Integrada:** Configuración con H2 que facilita el despliegue inmediato sin dependencias externas de BD.
+5. **Validación de Datos:** Uso de anotaciones de validación para asegurar la integridad de la información ingresada al sistema.
 
-Para ejecutar este proyecto en tu máquina local, sigue estos pasos:
-
-1. **Clonar el repositorio:**
-   ```bash
-   git clone [https://github.com/alonsolmz/alonsolmz-java-oop-core.git](https://github.com/alonsolmz/alonsolmz-java-oop-core.git)
